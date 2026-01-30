@@ -1,18 +1,47 @@
-# 🛡️ PluginTemplate Enterprise Engine
+# 🛡️ PluginTemplate Enterprise Engine (Web Dashboard Edition)
 
-Uma engine de Minecraft robusta e escalável desenvolvida para Spigot/Paper, focada em alta performance, código limpo e arquitetura orientada a serviços.
+Uma engine de Minecraft robusta e escalável desenvolvida para **Paper 1.21.1+**, focada em alta performance, código limpo, arquitetura orientada a serviços e monitoramento em tempo real.
+
+---
+
+## 🛠️ Modernizações Recentes (Paper 1.21.1)
+
+Esta versão foi totalmente migrada para as APIs mais recentes do Paper:
+*   **Adventure API:** Integração nativa com `Component` e `MiniMessage` para mensagens ricas e formatadas.
+*   **Lifecycle API:** Registro dinâmico de comandos via `LifecycleEventManager`, eliminando a necessidade de declarações estáticas no `paper-plugin.yml`.
+*   **Brigadier Support:** Comandos agora implementam `BasicCommand`, permitindo suporte nativo ao sistema Brigadier (tab-complete avançado).
+*   **Async Chat Event:** Processamento de chat moderno usando as novas especificações do Paper.
+
+---
+
+## 🖥️ Web Dashboard (Built-in)
+
+Esta versão inclui uma dashboard web completa para monitoramento do servidor em tempo real.
+
+*   **Backend:** Localizado em `/web-dashboard/server` (Node.js + Socket.io).
+*   **Frontend:** Localizado em `/web-dashboard/client` (React + Vite).
+*   **Recursos:**
+    *   Monitoramento de logs em tempo real.
+    *   Gráficos de performance (TPS/RAM).
+    *   Gerenciamento remoto.
+
+### Como Iniciar a Dashboard:
+Execute o script na pasta raiz:
+```bash
+./web-dashboard/start-dashboard.sh
+```
 
 ---
 
 ## 🏠 Architecture Overview
 
-O projeto utiliza uma **Service-Oriented Architecture (SOA)** com foco em desacoplamento e facilidade de manutenção.
+O projeto utiliza uma **Service-Oriented Architecture (SOA)** com foco em desacoplamento.
 
 ### Pilares Fundamentais:
-*   **IoC (Inversion of Control):** Gerenciado pelo `ServiceManager`. Nenhuma classe deve ser instanciada manualmente com `new` se ela possuir lógica de negócio; ela deve ser registrada e recuperada via `PluginCore`.
-*   **Async-First:** Priorizamos operações assíncronas para manter o TPS do servidor estável. Todo processamento pesado ou I/O deve ocorrer fora da Main Thread.
-*   **Repository Pattern:** A persistência de dados (YAML, SQL, etc.) é abstraída via Repositories, permitindo trocar o sistema de salvamento sem alterar a lógica dos serviços.
-*   **Separation of Concerns:** Nenhuma lógica de negócio reside no `BasePlugin` ou em `Listeners`. Listeners apenas capturam eventos e delegam para os serviços apropriados.
+*   **IoC (Inversion of Control):** Gerenciado pelo `ServiceManager`. Injeção de dependências facilitada via `PluginCore`.
+*   **Async-First:** Priorizamos operações assíncronas para manter o TPS estável.
+*   **Repository Pattern:** Abstração completa da camada de dados (YAML/SQL).
+*   **Dynamic Lifecycle:** Gerenciamento moderno de recursos seguindo os padrões do Paper.
 
 ---
 
@@ -20,97 +49,56 @@ O projeto utiliza uma **Service-Oriented Architecture (SOA)** com foco em desaco
 
 A organização segue uma hierarquia de domínios clara:
 
-*   `com.template.plugin`: Contém a classe principal (`BasePlugin`) e o contexto da aplicação.
-*   `services.core`: Serviços de infraestrutura global (Gerenciamento de Usuários, Configurações, Tasks Agendadas, Permissões).
-*   `services.visual`: Toda a camada de interface com o usuário (Scoreboard, Tablist, Formatação de Chat, GUIs).
-*   `services.engine`: Lógicas específicas de gameplay e mecânicas (Estados de Jogo, Times, Cooldowns, Mundos).
-*   `models` & `repositories`: Definição de objetos de dados e contratos de persistência.
+*   `com.template.plugin`: Classe principal e contexto.
+*   `services.core`: Infraestrutura (Config, Usuários, Tasks, Dashboard).
+*   `services.visual`: Interface (Scoreboard, Tablist, Chat modernizado).
+*   `services.engine`: Gameplay (Estados, Times, Mundos).
+*   `web-dashboard`: Sistema de monitoramento externo.
 
 ---
 
 ## 🚀 Developer Guide
 
 ### 1. Criando um Novo Comando
-Estenda `CommandBase` para herdar o sistema automático de permissões e processamento de argumentos.
+Estenda `CommandBase` (que implementa `BasicCommand`). O registro é feito em `AppContext` via Lifecycle API.
 
 ```java
 public class MyCommand extends CommandBase {
     public MyCommand(PluginCore core) {
-        super(core, "mycommand", "permission.admin");
+        super(core);
     }
-
     @Override
-    public void execute(CommandSender sender, String[] args) {
-        sender.sendMessage("Comando executado com sucesso!");
-    }
-}
-```
-
-### 2. Adicionando uma Nova Configuração
-O sistema é **Data-Driven**. Siga estes passos:
-1.  Adicione o campo no `.yml` (ex: `chat.yml`).
-2.  Atualize o POJO correspondente (ex: `ChatSettings`).
-3.  Acesse via serviço:
-```java
-String format = configService.getChatSettings().getFormat();
-```
-
-### 3. Criando uma Interface (GUI)
-Utilize o sistema de `Menu` para criar GUIs responsivas:
-
-```java
-public class ProfileMenu extends Menu {
-    public ProfileMenu(PluginCore core) {
-        super(core, "&8Seu Perfil", 3); // 3 rows
-    }
-
-    @Override
-    public void setupItems() {
-        setItem(13, new ItemBuilder(Material.SKULL_ITEM).setName("&aEstatísticas").build(), (event) -> {
-            player.sendMessage("Abrindo estatísticas...");
-        });
+    public void execute(CommandContext context) {
+        context.getSender().sendMessage(MiniMessage.miniMessage().deserialize("<green>Sucesso!</green>"));
     }
 }
 ```
 
 ### 4. Usando o Task Service (Async Safety)
-**Nunca** use `Bukkit.getScheduler()` diretamente. Use o `ITaskService` para garantir segurança entre threads.
+**Nunca** use `Bukkit.getScheduler()`. Use o `ITaskService`.
 
 ```java
 taskService.runAsyncThenSync(
-    () -> userRepository.loadData(uuid), // Executa em paralelo
-    (data) -> player.sendMessage("Dados carregados: " + data) // Retorna para a Main Thread
+    () -> userRepository.loadData(uuid),
+    (data) -> player.sendMessage(Component.text("Carregado!"))
 );
 ```
 
 ---
 
-## ⚙️ Configuration & Features
+## ⚙️ Deployment & Scripts
 
-A maioria das funcionalidades suporta **Hot-Reload**. Ao alterar um arquivo, use o comando de reload para atualizar os POJOs em memória:
+Temos ferramentas de automação para facilitar o desenvolvimento:
 
-*   `config.yml`: Configurações globais e banco de dados.
-*   `chat.yml`: Formatação de chat e tooltips JSON.
-*   `scoreboard.yml`: Sidebar dinâmica e intervalos de atualização.
-*   `tab.yml`: Cabeçalho e rodapé da lista de jogadores.
-
----
-
-## ❌ Anti-Patterns (Regras de Ouro)
-
-1.  **Proibido:** `Bukkit.getScheduler()`. **Use:** `ITaskService`.
-2.  **Proibido:** `new ServiceImpl()`. **Use:** Registro no `ServiceManager`.
-3.  **Proibido:** Bloquear a Main Thread com I/O ou consultas SQL.
-4.  **Proibido:** Colocar lógica de comandos dentro da classe principal do plugin.
+*   `./scripts/deploy.sh`: Builder completo que verifica se a porta 25565 está aberta antes de compilar, evitando travamentos de arquivo JAR no Linux.
+*   `mvn clean package`: Build padrão via Maven (o JAR é copiado automaticamente para a pasta de plugins configurada no `pom.xml`).
 
 ---
 
 ## 🛠 Instalação & Build
 
-Para compilar o projeto e gerar o JAR com timestamp único:
-
 ```bash
 mvn clean package -DskipTests
 ```
 
-O artefato será gerado na pasta `/target`.
+O artefato será gerado na pasta `/target` e implantado automaticamente conforme configurado no `maven-antrun-plugin`.
