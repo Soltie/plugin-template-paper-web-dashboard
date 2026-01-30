@@ -1,0 +1,16 @@
+# ==========================================
+#        PLUGIN TEMPLATE - CONFIG
+# ==========================================
+
+# Example configuration section
+general:
+  debug_mode: false
+  
+messages:
+  prefix: "&8[&bTemplate&8] &7"
+  reload_success: "Config reloaded successfully."
+  no_permission: "&cYou don't have permission to do that."
+
+storage:
+  type: "YAML" # Future: MYSQL, MONGODB
+

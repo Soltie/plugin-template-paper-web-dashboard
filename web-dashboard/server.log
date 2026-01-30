@@ -1,0 +1,5 @@
+Dashboard API running on http://localhost:3000
+[DASHBOARD] Action Queued: KICK -> xpgteste ()
+[MC POLL] Plugin polling... delivering 1 commands.
+[DASHBOARD] Action Queued: BROADCAST -> ALL (teste)
+[MC POLL] Plugin polling... delivering 1 commands.

@@ -1,0 +1,19 @@
+# Tablist Configuration
+# Controls Header and Footer
+
+enabled: true
+update-interval: 60 # Ticks
+
+header:
+  - ""
+  - "&b&lMY SERVER"
+  - "&7Welcome, &f{player}&7!"
+  - ""
+
+footer:
+  - ""
+  - "&7Online Players: &b{online}"
+  - "&7Ping: &a{ping}ms"
+  - ""
+  - "&eVisit our store: &fstore.myserver.com"
+  - ""

@@ -1,0 +1,8 @@
+name: PluginTemplate
+version: 1.0.0
+main: com.template.plugin.BasePlugin
+api-version: '1.20'
+description: A modern Paper plugin template.
+author: FoxOS_User
+website: https://example.com
+

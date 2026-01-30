@@ -1,0 +1,16 @@
+# Scoreboard Configuration
+# Controls the sidebar display
+
+enabled: true
+title: "&b&lMY SERVER"
+update-interval: 20 # Ticks (20 ticks = 1 second)
+
+lines:
+  - "&7----------------"
+  - "&fPlayer: &b{player}"
+  - "&fRank: &b{rank}"
+  - "&fMoney: &e${money}"
+  - ""
+  - "&fOnline: &a{online}"
+  - "&7----------------"
+  - "&eplay.myserver.com"

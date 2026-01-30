@@ -1,0 +1,20 @@
+# Chat Configuration
+# Controls chat formatting and tooltips
+
+enabled: true
+
+# Format used for players in-game
+# Supports placeholders: {player}, {rank}, {message}, {money}
+format: "&8[{rank}] &f{player}&7: &f{message}"
+
+# Format used for logging chat in the console
+console-format: "[CHAT] {player}: {message}"
+
+# Tooltip shown when hovering over the player's name
+# Only works if the plugin uses component-based chat (like Adventure or Paper API)
+hover-tooltip:
+  - "&b&l{player}"
+  - "&7Rank: &f{rank}"
+  - "&7Money: &e${money}"
+  - ""
+  - "&eClick to message!"

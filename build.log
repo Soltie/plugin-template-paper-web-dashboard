@@ -1,0 +1,115 @@
+[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< com.template.plugin:plugin-template >-----------------
+[INFO] Building PluginTemplate 1.0.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ plugin-template ---
+[INFO] Deleting c:\Users\FoxOS_User\Documents\teste-plugin\plugin-template\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ plugin-template ---
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.8.1:compile (default-compile) @ plugin-template ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 35 source files to c:\Users\FoxOS_User\Documents\teste-plugin\plugin-template\target\classes
+[INFO] /c:/Users/FoxOS_User/Documents/teste-plugin/plugin-template/src/main/java/com/template/plugin/events/internal/EventBus.java: Some input files use unchecked or unsafe operations.
+[INFO] /c:/Users/FoxOS_User/Documents/teste-plugin/plugin-template/src/main/java/com/template/plugin/events/internal/EventBus.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ plugin-template ---
+[INFO] skip non existing resourceDirectory c:\Users\FoxOS_User\Documents\teste-plugin\plugin-template\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ plugin-template ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to c:\Users\FoxOS_User\Documents\teste-plugin\plugin-template\target\test-classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /c:/Users/FoxOS_User/Documents/teste-plugin/plugin-template/src/test/java/com/xpg/vista/AppTest.java:[3,24] package org.junit does not exist
+[ERROR] /c:/Users/FoxOS_User/Documents/teste-plugin/plugin-template/src/test/java/com/xpg/vista/AppTest.java:[3,1] static import only from classes and interfaces
+[ERROR] /c:/Users/FoxOS_User/Documents/teste-plugin/plugin-template/src/test/java/com/xpg/vista/AppTest.java:[5,17] package org.junit does not exist
+[ERROR] /c:/Users/FoxOS_User/Documents/teste-plugin/plugin-template/src/test/java/com/xpg/vista/AppTest.java:[15,6] cannot find symbol
+  symbol:   class Test
+  location: class com.xpg.vista.AppTest
+[ERROR] /c:/Users/FoxOS_User/Documents/teste-plugin/plugin-template/src/test/java/com/xpg/vista/AppTest.java:[18,9] cannot find symbol
+  symbol:   method assertTrue(boolean)
+  location: class com.xpg.vista.AppTest
+[INFO] 5 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.060 s
+[INFO] Finished at: 2026-01-26T03:04:40-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:testCompile (default-testCompile) on project plugin-template: Compilation failure: Compilation failure: 
+[ERROR] /c:/Users/FoxOS_User/Documents/teste-plugin/plugin-template/src/test/java/com/xpg/vista/AppTest.java:[3,24] package org.junit does not exist
+[ERROR] /c:/Users/FoxOS_User/Documents/teste-plugin/plugin-template/src/test/java/com/xpg/vista/AppTest.java:[3,1] static import only from classes and interfaces
+[ERROR] /c:/Users/FoxOS_User/Documents/teste-plugin/plugin-template/src/test/java/com/xpg/vista/AppTest.java:[5,17] package org.junit does not exist
+[ERROR] /c:/Users/FoxOS_User/Documents/teste-plugin/plugin-template/src/test/java/com/xpg/vista/AppTest.java:[15,6] cannot find symbol
+[ERROR]   symbol:   class Test
+[ERROR]   location: class com.xpg.vista.AppTest
+[ERROR] /c:/Users/FoxOS_User/Documents/teste-plugin/plugin-template/src/test/java/com/xpg/vista/AppTest.java:[18,9] cannot find symbol
+[ERROR]   symbol:   method assertTrue(boolean)
+[ERROR]   location: class com.xpg.vista.AppTest
+[ERROR] -> [Help 1]
+org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:testCompile (default-testCompile) on project plugin-template: Compilation failure
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:333)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:316)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:212)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:174)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:75)
+    at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:162)
+    at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:159)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:105)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:73)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:53)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:118)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:261)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:173)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:101)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:919)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:285)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:207)
+    at jdk.internal.reflect.DirectMethodHandleAccessor.invoke (DirectMethodHandleAccessor.java:104)
+    at java.lang.reflect.Method.invoke (Method.java:565)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:255)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:201)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:361)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:314)
+Caused by: org.apache.maven.plugin.compiler.CompilationFailureException: Compilation failure
+    at org.apache.maven.plugin.compiler.AbstractCompilerMojo.execute (AbstractCompilerMojo.java:1220)
+    at org.apache.maven.plugin.compiler.TestCompilerMojo.execute (TestCompilerMojo.java:180)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:126)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:328)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:316)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:212)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:174)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:75)
+    at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:162)
+    at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:159)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:105)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:73)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:53)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:118)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:261)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:173)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:101)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:919)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:285)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:207)
+    at jdk.internal.reflect.DirectMethodHandleAccessor.invoke (DirectMethodHandleAccessor.java:104)
+    at java.lang.reflect.Method.invoke (Method.java:565)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:255)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:201)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:361)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:314)
+[ERROR] 
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
