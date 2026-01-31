@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.template.plugin</groupId>
-    <artifactId>plugin-template</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <artifactId>PluginWeb-Beta</artifactId>
+    <version>0.1.0</version>
     <packaging>jar</packaging>
 
-    <name>PluginTemplate</name>
+    <name>PluginWeb-Beta</name>
 
     <properties>
         <java.version>17</java.version>
@@ -17,7 +17,7 @@
     </properties>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
+        <finalName>${project.artifactId}-V${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -50,9 +50,9 @@
                         <phase>package</phase>
                         <configuration>
                             <target>
-                                <delete file="/home/xpg/Downloads/paper-server-teste/plugins/${project.artifactId}.jar" failonerror="false"/>
+                                <delete file="/home/xpg/Downloads/paper-server-teste/plugins/${project.build.finalName}.jar" failonerror="false"/>
                                 <copy file="${project.build.directory}/${project.build.finalName}.jar"
-                                      tofile="/home/xpg/Downloads/paper-server-teste/plugins/${project.artifactId}.jar"
+                                      tofile="/home/xpg/Downloads/paper-server-teste/plugins/${project.build.finalName}.jar"
                                       overwrite="true"/>
                             </target>
                         </configuration>

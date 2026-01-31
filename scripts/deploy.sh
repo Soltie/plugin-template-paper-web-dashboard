@@ -25,15 +25,16 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# The pom.xml already handles the copy via maven-antrun-plugin,
-# but we can verify it here.
-JAR_FILE="target/plugin-template.jar"
+# Find the generated JAR (excluding original-*)
+JAR_FILE=$(find target -maxdepth 1 -name "*.jar" ! -name "original-*" -type f | head -1)
 
-if [ ! -f "$JAR_FILE" ]; then
+if [ -z "$JAR_FILE" ] || [ ! -f "$JAR_FILE" ]; then
     echo "❌ JAR file not found in target!"
     exit 1
 fi
 
+JAR_NAME=$(basename "$JAR_FILE")
+
 echo "✅ Build successful!"
-echo "📂 JAR deployed to: $PLUGINS_DIR"
+echo "📂 JAR deployed to: $PLUGINS_DIR/$JAR_NAME"
 echo "✨ Done!"
