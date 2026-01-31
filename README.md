@@ -4,8 +4,6 @@
 
 [![Paper](https://img.shields.io/badge/Paper-1.21.1+-blue)](https://papermc.io)
 [![Java](https://img.shields.io/badge/Java-21+-orange)](https://openjdk.org/)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-
 ---
 
 ## ✨ Principais Funcionalidades
@@ -171,11 +169,6 @@ mvn clean package -DskipTests
 
 ---
 
-## 📄 Licença
-
-Este projeto é distribuído sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
----
 
 ## 🤝 Contribuindo
 
@@ -188,3 +181,4 @@ Este projeto é distribuído sob a licença MIT. Veja o arquivo [LICENSE](LICENS
 ---
 
 > Desenvolvido com ❤️ para a comunidade Minecraft
+
