@@ -18,3 +18,14 @@ hover-tooltip:
   - "&7Money: &e${money}"
   - ""
   - "&eClick to message!"
+
+# Join/Quit Messages
+# Supports placeholders: {player}, {rank}
+# Set to empty ("") to disable
+join-message:
+  enabled: true
+  message: "&8[&a+&8] &7{player} entrou no servidor!"
+
+quit-message:
+  enabled: true
+  message: "&8[&c-&8] &7{player} saiu do servidor."

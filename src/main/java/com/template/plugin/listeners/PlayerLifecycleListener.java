@@ -2,10 +2,13 @@ package com.template.plugin.listeners;
 
 import com.template.plugin.core.PluginCore;
 import com.template.plugin.services.core.interfaces.IUserService;
+import com.template.plugin.services.visual.interfaces.IChatService;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 /**
@@ -17,10 +20,12 @@ public class PlayerLifecycleListener implements Listener {
 
     private final PluginCore core;
     private final IUserService<?> userService;
+    private final IChatService chatService;
 
     public PlayerLifecycleListener(PluginCore core) {
         this.core = core;
         this.userService = core.getService(IUserService.class);
+        this.chatService = core.getService(IChatService.class);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -39,10 +44,21 @@ public class PlayerLifecycleListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        event.joinMessage(null); // Disable default message
+        chatService.handleJoin(player);
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
     public void onQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        event.quitMessage(null); // Disable default message
+        chatService.handleQuit(player);
+
         // Salva e invalida cache
-        java.util.UUID uuid = event.getPlayer().getUniqueId();
+        java.util.UUID uuid = player.getUniqueId();
         userService.saveUser(uuid)
                 .thenRun(() -> {
                     userService.invalidate(uuid);

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="maven-antrun-" default="main">
-  <target name="main">
-    <delete file="/home/xpg/Downloads/paper-server-teste/plugins/plugin-template.jar" failonerror="false" />
-    <copy file="/home/xpg/Desktop/fffff/teste-plugin/plugin-template-paper/target/plugin-template.jar" tofile="/home/xpg/Downloads/paper-server-teste/plugins/plugin-template.jar" overwrite="true" />
-  </target>
-</project>
